@@ -17,7 +17,9 @@
 		$smarty->display( $template );
 
 	} catch (Exception $e){ 
-		echo "エラー発生:" . $e->getMessage();
+		$url = HOME_URL . "?url=" . urlencode($url) . "&err=99";
+		header("HTTP/1.1 301 Moved Permanently");
+		header("Location: " . $url);
 		exit();
 	}
 

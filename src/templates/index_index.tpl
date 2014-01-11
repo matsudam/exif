@@ -34,17 +34,17 @@
 
 	<form action="/exif/?" method="get">
 		<p>
-			<input type="text" name="url" id="input" value="{$url}" />
+			<input type="text" name="url" id="input" value="{$url}" onclick="this.select();" />
 		</p>
 		<p>
 			<input type="submit" id="submit" value="チェック！" />
 		</p>
 	</form>
 
-	{if $err}
-	<p id="msg">
-		<span id="msg" class="err">指定されたファイルにEXIF情報がありませんでした。（code:{$err}）</span>
-	</p>
+	{if $err ==99}
+	<p id="msg"><span id="msg" class="err">指定されたURLが画像ファイルではありません。（code:{$err}）</span></p>
+	{elseif $err}
+	<p id="msg"><span id="msg" class="err">指定されたファイルにEXIF情報がありませんでした。（code:{$err}）</span></p>
 	{/if}
 
 	{if !$url}

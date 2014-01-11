@@ -1,9 +1,11 @@
 <?php
 
-	$err = 0;
-	$url = urldecode($param["url"]);
+	$err = $param["err"];
+	$url = $param["url"];
 
-	if($url){
+	if($url && !$err){
+		$url = str_replace(" ", "%20", $url);
+
 		$jpeg = new PelJpeg($url);
 		if( !$jpeg ) {$err = 1;}
 
@@ -50,7 +52,10 @@
 
 			$smarty->assign('exif', $data);
 		}
-		$smarty->assign('url', $url);
-		$smarty->assign('err', $err);
 	}
+
+	$url = urldecode($param["url"]);
+	$smarty->assign('url', $url);
+	$smarty->assign('err', $err);
+	
 ?>
